@@ -1,25 +1,25 @@
-const merge = require('webpack-merge')
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const safeParser = require('postcss-safe-parser')
-const TerserPlugin = require('terser-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
-const { resolve } = require('path')
-const baseConfig = require('./webpack.base')
+const merge = require("webpack-merge");
+const ExtractCssChunks = require("extract-css-chunks-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const safeParser = require("postcss-safe-parser");
+const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const { resolve } = require("path");
+const baseConfig = require("./webpack.base");
 const nodeExternals = require("webpack-node-externals");
 
 module.exports = merge(baseConfig, {
-    entry: "./src/index.js",
-    output: {
-      path: resolve(__dirname, './dist'),
-      filename: "index.js",
-      libraryTarget: "umd",
-      library: "target-3d-map",  
-    },  
-   mode: 'production',
-   devtool: "source-map",
+  entry: "./src/index.js",
+  output: {
+    path: resolve(__dirname, "./dist"),
+    filename: "index.js",
+    libraryTarget: "umd",
+    library: "target-3d-map",
+  },
+  mode: "production",
+  devtool: "source-map",
 
-module: {
+  module: {
     rules: [
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       {
@@ -30,7 +30,7 @@ module: {
       },
       {
         test: /\.css/,
-        use: ["style-loader", "css-loader"]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.scss$/,
@@ -51,5 +51,6 @@ module: {
       }
     ],
   },
+
   externals: [nodeExternals()],
-})
+});
